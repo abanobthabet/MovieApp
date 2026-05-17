@@ -1,6 +1,23 @@
-# movies_app
+# Movies App
 
-A new Flutter project.
+A Flutter movie application built using Clean Architecture and REST APIs to provide a scalable and responsive user experience.
+
+## Features
+- Fetch and display movies dynamically using APIs
+- Movie details screen
+- Browse movie categories
+- Search for movies
+- Responsive and clean UI
+- State management using Cubit (Flutter Bloc)
+- Clean Architecture implementation
+
+## Technologies Used
+- Flutter
+- Dart
+- Cubit / Flutter Bloc
+- REST API
+- Dio
+- Clean Architecture
 
 ## Getting Started
 
