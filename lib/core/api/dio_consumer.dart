@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 
-import 'package:hungry_app/core/api/api_consumer.dart';
-import 'package:hungry_app/core/api/api_interceptors.dart';
-import 'package:hungry_app/core/api/endpoint.dart';
-import 'package:hungry_app/core/error/exption.dart';
+import 'package:movies_app/core/api/api_consumer.dart';
+import 'package:movies_app/core/api/api_interceptors.dart';
+import 'package:movies_app/core/api/endpoint.dart';
+import 'package:movies_app/core/error/exption.dart';
 
 class DioConsumer extends ApiConsumer {
   final Dio dio;

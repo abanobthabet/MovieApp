@@ -9,4 +9,15 @@ class MovieModel extends GetMovies {
     required super.voteAverage,
     required super.releaseDate,
   });
+
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
+      id: json['id'],
+      title: json['title'],
+      backdropPath: json['backdrop_path'],
+      genreIds: List<int>.from(json['genre_ids'].map((e)=>e)),
+      voteAverage: json['vote_average'],
+      releaseDate: json['release_date'],
+    );
+  }
 }

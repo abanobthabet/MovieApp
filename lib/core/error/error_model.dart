@@ -1,4 +1,4 @@
-import 'package:hungry_app/core/api/endpoint.dart';
+import 'package:movies_app/core/api/endpoint.dart';
 
 class ErrorModel {
   final int? statusCode;
@@ -9,7 +9,7 @@ class ErrorModel {
   factory ErrorModel.fromJson(Map<String, dynamic> json) {
     return ErrorModel(
       statusCode: json[ApiKey.statusCode],
-      message: json[ApiKey.errormessage],
+      message: json[ApiKey.statusMessage],
     );
   }
 }

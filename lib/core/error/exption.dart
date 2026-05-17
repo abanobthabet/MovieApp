@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import 'package:hungry_app/core/error/error_model.dart';
+import 'package:movies_app/core/error/error_model.dart';
 
 class ExceptionHandler implements Exception {
   final ErrorModel? errorModel;

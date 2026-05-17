@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:hungry_app/core/utils/pref_helpler.dart';
 
 class ApiInterceptors extends Interceptor {
   @override
@@ -9,10 +8,10 @@ class ApiInterceptors extends Interceptor {
   ) async {
     //options.headers['Accept-Language'] = 'ar';
 
-    final String? token = await PrefHelpler().getToken();
-    if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
-    }
+    // final String? token = await PrefHelpler().getToken();
+    // if (token != null) {
+    //   options.headers['Authorization'] = 'Bearer $token';
+    // }
     options.headers['Accept'] = 'application/json';
     super.onRequest(options, handler);
   }
