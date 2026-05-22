@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   equatable: ^2.0.8
   dio: ^5.9.2
+  dartz: ^0.10.1
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:

@@ -24,14 +24,14 @@ class MovieRemotDataSource extends BaseMovieRemoteDataSource {
    
   );
 
-  List<dynamic> resulte = response.data['results'];
+  List<dynamic> results = response.data['results'];
 
-  List<MovieModel> listMovie = resulte.map((e)=>MovieModel.fromJson(e)).toList();
+  List<MovieModel> listMovie = results.map((e)=>MovieModel.fromJson(e)).toList();
 
   return listMovie;
 
-} on ExceptionHandler catch (e) {
-  throw ExceptionHandler(errorModel: e.errorModel, error:e.error);
+} on ServerExption catch (e) {
+  throw ServerExption(errorModel: e.errorModel, error:e.error);
 }
   }
 
@@ -44,14 +44,14 @@ class MovieRemotDataSource extends BaseMovieRemoteDataSource {
    
   );
 
-  List<dynamic> resulte = response.data['results'];
+  List<dynamic> results = response.data['results'];
 
-  List<MovieModel> listMovie = resulte.map((e)=>MovieModel.fromJson(e)).toList();
+  List<MovieModel> listMovie = results.map((e)=>MovieModel.fromJson(e)).toList();
 
   return listMovie;
 
-} on ExceptionHandler catch (e) {
-  throw ExceptionHandler(errorModel: e.errorModel, error:e.error);
+} on ServerExption catch (e) {
+  throw ServerExption(errorModel: e.errorModel, error:e.error);
 }
   }
 
@@ -64,14 +64,14 @@ class MovieRemotDataSource extends BaseMovieRemoteDataSource {
    
   );
 
-  List<dynamic> resulte = response.data['results'];
+  List<dynamic> results = response.data['results'];
 
-  List<MovieModel> listMovie = resulte.map((e)=>MovieModel.fromJson(e)).toList();
+  List<MovieModel> listMovie = results.map((e)=>MovieModel.fromJson(e)).toList();
 
   return listMovie;
 
-} on ExceptionHandler catch (e) {
-  throw ExceptionHandler(errorModel: e.errorModel, error:e.error);
+} on ServerExption catch (e) {
+  throw ServerExption(errorModel: e.errorModel, error:e.error);
 }
   }
 }

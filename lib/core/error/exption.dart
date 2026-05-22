@@ -1,25 +1,31 @@
 import 'package:dio/dio.dart';
 
-import 'package:movies_app/core/error/error_model.dart';
+import 'error_model.dart';
 
-class ExceptionHandler implements Exception {
+class ServerExption implements Exception {
   final ErrorModel? errorModel;
   final String? error;
 
-  ExceptionHandler({this.errorModel, this.error});
+  ServerExption({this.errorModel, this.error});
+}
+
+class LocalDatabaseExption implements Exception {
+  final String? error;
+
+  LocalDatabaseExption({this.error});
 }
 
 void handelDioException(DioException e) {
   switch (e.type) {
     case DioExceptionType.connectionTimeout:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'Connection timeout',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
             : null,
       );
     case DioExceptionType.sendTimeout:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'Failed to send data',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
@@ -27,7 +33,7 @@ void handelDioException(DioException e) {
       );
 
     case DioExceptionType.receiveTimeout:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'Server took too long to respond',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
@@ -35,7 +41,7 @@ void handelDioException(DioException e) {
       );
 
     case DioExceptionType.badCertificate:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'Security certificate error',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
@@ -43,7 +49,7 @@ void handelDioException(DioException e) {
       );
 
     case DioExceptionType.cancel:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'Request was cancelled',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
@@ -51,7 +57,7 @@ void handelDioException(DioException e) {
       );
 
     case DioExceptionType.connectionError:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'No internet connection',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
@@ -59,7 +65,7 @@ void handelDioException(DioException e) {
       );
 
     case DioExceptionType.unknown:
-      throw ExceptionHandler(
+      throw ServerExption(
         error: 'An unexpected error occurred',
         errorModel: e.response?.data != null
             ? ErrorModel.fromJson(e.response!.data)
@@ -69,56 +75,57 @@ void handelDioException(DioException e) {
     case DioExceptionType.badResponse:
       switch (e.response?.statusCode) {
         case 401:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Unauthorized',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         case 403:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Access denied',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         case 404:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Not found',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         case 409:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Conflict',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         case 422:
-          throw ExceptionHandler(
-            error: 'Invalid data',
+          String error = e.response?.data['status_message'];
+          throw ServerExption(
+            error: error,
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         case 500:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Server error',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         case 504:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Server not responding',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
                 : null,
           );
         default:
-          throw ExceptionHandler(
+          throw ServerExption(
             error: 'Ops, there was an error',
             errorModel: e.response?.data != null
                 ? ErrorModel.fromJson(e.response!.data)
@@ -126,8 +133,6 @@ void handelDioException(DioException e) {
           );
       }
     default:
-      throw ExceptionHandler(
-        error: 'Ops, there was an error',
-      );
+      throw ServerExption(error: 'Ops, there was an error');
   }
 }
